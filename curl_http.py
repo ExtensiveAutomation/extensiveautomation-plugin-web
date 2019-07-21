@@ -295,7 +295,7 @@ class Curl(TestAdapterLib.Adapter):
 			
 			curl_cmd = '%s -v -s ' % (CURL_BIN)
 			curl_cmd += ' --user-agent ExtensiveAutomation'
-			
+
 			if method is not None:
 				curl_cmd += " -X %s" % method
 			if headers is not None:
@@ -303,7 +303,7 @@ class Curl(TestAdapterLib.Adapter):
 					curl_cmd += ' -H "%s"' % hdr
 			if proxy_host is not None:
 				curl_cmd += ' -x %s' % proxy_host
-				
+
 			if more is not None:
 				curl_cmd += " %s" % (more)
 				
@@ -312,15 +312,18 @@ class Curl(TestAdapterLib.Adapter):
 			curl_cmd += '%{time_appconnect}, %{time_namelookup},'
 			curl_cmd += '%{http_code},%{size_download},'
 			curl_cmd += '%{url_effective},%{remote_ip}\n"'
-	
+
 			curl_cmd+= '	--connect-timeout %s --max-time %s ' % ( int(timeout_connect), int(timeout_max) )
 			curl_cmd += ' -o "%s"' % outfile
-			
+
 			if body is not None:
 				with open(infile, "wb") as f:
-					f.write(body)
+					if sys.version_info < (3,):
+						f.write(body)
+					else:
+						f.write( bytes(body, 'utf8')  )
 				curl_cmd += ' --data-binary "@%s"'  % infile
-				
+
 			curl_cmd += ' 	%s' % host
 			self.debug(curl_cmd)
 			
@@ -329,23 +332,27 @@ class Curl(TestAdapterLib.Adapter):
 																					stdout=subprocess.PIPE, 
 																					stderr=subprocess.STDOUT,
 																					bufsize=0)
-		
+				self.trace("curl - command executed")
+				
 				conn_info = []
 				req_out = []
 				rsp_in = []
-				
-				self.trace("curl - command executed")
+
 				while True:
 					line = ps.stdout.readline()
-					line = line.decode('latin-1').encode("utf-8") 
+					if sys.version_info < (3,):
+						line = line.decode('latin-1').encode("utf-8") 
+					else:
+						line = line.decode("utf-8")
+						
 					if line != '':
+						time.sleep(0.01)
 						if line.startswith("*"):
 							conn_info.append(line[1:].strip())
 						elif line.startswith("> "):
 							req_out.append(line[2:].strip())
 						elif line.startswith("< "):
 							if not len(rsp_in):
-								
 								# log event 
 								tpl_req = TestTemplates.TemplateMessage()
 								layer_curl = TestTemplates.TemplateLayer('CURL_HTTP')
@@ -356,7 +363,7 @@ class Curl(TestAdapterLib.Adapter):
 								if body is not None: req_out.append(body)
 								tpl_req.addRaw("\n".join(req_out)  )
 								if self.logEventSent: self.logSentEvent( shortEvt = req_out[0], tplEvt = tpl_req ) 
-	
+
 							rsp_in.append(line[2:].strip())	
 						elif line.startswith("{"):
 							continue
@@ -366,7 +373,8 @@ class Curl(TestAdapterLib.Adapter):
 							conn_info.append(line.strip())
 					else:
 						break
-						
+
+				
 				# read the response 
 				self.trace("curl - reading the response")
 				rsp_body=None
