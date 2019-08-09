@@ -20,12 +20,3 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301 USA
 # -------------------------------------------------------------------
-
-try:
-	from curl_http import *
-except ImportError: # python3 support
-	from .curl_http import *
-	
-__DESCRIPTION__ = """This adapter enable to use the HTTP protocol.
-
-More informations in the RFC2616."""

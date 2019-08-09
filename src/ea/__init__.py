@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding=utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # ------------------------------------------------------------------
 # Copyright (c) 2010-2019 Denis Machard
@@ -20,39 +20,3 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301 USA
 # -------------------------------------------------------------------
-import TestExecutorLib.TestValidatorsLib as TestValidatorsLib
-import TestExecutorLib.TestTemplatesLib as TestTemplatesLib
-import TestExecutorLib.TestOperatorsLib as TestOperatorsLib
-import TestExecutorLib.TestAdapterLib as TestAdapterLib
-
-import sys
-
-def curl_http(more=None):
-	"""
-	Construct a template for a HTTP packet
-	"""
-	tpl = TestTemplatesLib.TemplateLayer('CURL_HTTP')
-
-	# add additional keys
-	if more is not None:
-		tpl.addMore(more=more)
-		
-	return tpl
-
-def response(version=None, code=None, phrase=None, headers=None, body=None):
-	"""
-	"""
-	tpl = TestTemplatesLib.TemplateLayer('CURL_HTTP_RESPONSE')
-	
-	if phrase is not None:
-		tpl.addKey(name='phrase', data=phrase)
-	if code is not None:
-		tpl.addKey(name='code', data=code)
-	if version is not None:
-		tpl.addKey(name='version', data=version)	
-
-	if headers is not None:
-		tpl.addKey(name='headers', data=headers )
-	if body is not None:
-		tpl.addKey(name='body', data=body)
-	return tpl
