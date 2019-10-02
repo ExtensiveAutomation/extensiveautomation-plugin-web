@@ -378,12 +378,15 @@ class Curl(TestAdapterLib.Adapter):
 					rsp_decoded = rsp_in[0].split(" ", 2)
 					rsp_code = rsp_decoded[1]
 					rsp_version = rsp_decoded[0]
-					rsp_phrase =  rsp_decoded[2]
-				
+					if len(rsp_decoded) > 2:
+						rsp_phrase =  rsp_decoded[2]
+					else:
+						rsp_phrase = ""
+
 					self.trace("curl - log response")
 					with open(outfile) as f:
 						rsp_body = f.read()
-	
+
 					# log event 
 					tpl_rsp = TestTemplates.TemplateMessage()
 					layer_curl = TestTemplates.TemplateLayer('CURL_HTTP_RESPONSE')
