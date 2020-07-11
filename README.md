@@ -27,17 +27,19 @@ Installing from source
 1. Clone the following repository 
 
         git clone https://github.com/ExtensiveAutomation/extensiveautomation-plugin-web.git
-  
-2. Copy the folder `sutadapters` to /home/extensiveautomation/ and overwrite-it
-
-        cp -rf sutadapters /home/extensiveautomation/
+        cd extensiveautomation-plugin-web/src/ea/
         
-3. Copy the folder `var` to /home/extensiveautomation/ and overwrite-it
+2. Copy the folder `sutadapters` in the source code server and overwrite-it
 
-        cp -rf var /home/extensiveautomation/
+        cp -rf sutadapters/ /<install_path_project>/src/ea/
+        
+3. Copy the folder `var` in the source code server and overwrite-it
+
+        cp -rf var/ /<install_path_project>/src/ea/
         
 4. Finally execute the following command to install depandencies
 
-        cd /home/extensiveautomation/
-        python extensiveautomation.py --install_adapter WEB
+        cd /<install_path_project>/src/
+        python3 extensiveautomation.py --install_adapter WEB
+        python3 extensiveautomation.py --reload
         
