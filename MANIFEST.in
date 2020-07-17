@@ -1,2 +1,2 @@
 recursive-include src/ea/sutadapters/WEB/deps/ *
-recursive-include src/ea/var/tests/1/Samples/Adapter_WEB/ *
+recursive-include src/ea/var/tests/1/ *

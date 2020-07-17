@@ -1,4 +1,0 @@
-1.0.1
-	Date: 02/10/2019
-	Issues Fixed
-		1. (minor) support curl response without http phrase
