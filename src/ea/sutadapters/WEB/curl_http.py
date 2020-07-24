@@ -2,7 +2,7 @@
 # -*- coding=utf-8 -*-
 
 # ------------------------------------------------------------------
-# Copyright (c) 2010-2020 Denis Machard
+# Copyright (c) 2010-2019 Denis Machard
 # This file is part of the extensive automation project
 #
 # This library is free software; you can redistribute it and/or
@@ -152,13 +152,15 @@ class Curl(TestAdapterLib.Adapter):
 				if self.logEventSent: self.logSentEvent( shortEvt = req_out[0], tplEvt = tpl_req ) 
 				
 			elif data["response-type"] == "http-response":
-				
 				rsp_in = data["headers"] .splitlines()
 				
 				rsp_decoded = rsp_in[0].split(" ", 2)
 				rsp_code = rsp_decoded[1]
 				rsp_version = rsp_decoded[0]
-				rsp_phrase =  rsp_decoded[2]
+				if len(rsp_decoded) > 2:
+					rsp_phrase =  rsp_decoded[2]
+				else:
+					rsp_phrase = ""
 				
 				# log event 
 				tpl_rsp = TestTemplates.TemplateMessage()
