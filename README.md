@@ -1,14 +1,14 @@
-WEB plugin for ExtensiveAutomation server
-===================================================
-
-Introduction
-------------
+# WEB plugin for ExtensiveAutomation server
 
 This plugin enable to interact with remote web server through the HTTP protocol.
 This plugin is based on the `curl` command.
 
-Installing from pypi
---------------------
+## Table of contents
+* [Installing from pypi](#installing-from-pypi)
+* [Installing from source](#installing-from-source)
+* [About actions](#about-actions)
+
+## Installing from pypi
 
 1. Run the following command
 
@@ -20,8 +20,7 @@ Installing from pypi
         
 3. Samples are deployed on data storage
    
-Installing from source
-----------------------
+## Installing from source
 
 1. Clone the following repository 
 
@@ -41,4 +40,5 @@ Installing from source
         cd /<install_path_project>/src/
         python3 extensiveautomation.py --install_adapter WEB
         python3 extensiveautomation.py --reload
-        
+
+## About actions
