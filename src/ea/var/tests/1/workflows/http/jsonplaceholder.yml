@@ -11,7 +11,7 @@ actions:
         Content-Type: application/json
    - name: curl-body
      value:
-      title: un exemple en franÃ§ais
+      title: un exemple en français
       body: bonjour
       userId: 1
    - name: response-body-json
