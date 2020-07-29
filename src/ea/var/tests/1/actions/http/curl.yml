@@ -1,6 +1,6 @@
 properties:
   parameters:
-   - name: agent-curl
+   - name: agent
      value: null
    - name: debug
      value: false
@@ -48,14 +48,14 @@ python: |
     class Curl(Action):
       def definition(self, host):
           agent_support = False
-          if input('agent-curl') is not None:
+          if input('agent') is not None:
               agent_support = True
               
           self.ADP_CURL = SutAdapters.WEB.Curl(parent=self, name=None, 
                                                debug=input('debug'),
                                                shared=False,
                                                agentSupport=agent_support,
-                                               agent=input('agent-curl'),
+                                               agent=input('agent'),
                                                logEventSent=input('verbose'), 
                                                logEventReceived=input('verbose'))
                                                

@@ -42,7 +42,7 @@ This plugin is based on the `curl` command.
 4. Finally execute the following command to install depandencies
 
         cd /<install_path_project>/src/
-        python3 extensiveautomation.py --install_adapter WEB
+        python3 extensiveautomation.py --install-adapter WEB
         python3 extensiveautomation.py --reload
 
 ## About actions
@@ -52,7 +52,7 @@ This plugin is based on the `curl` command.
 Send http requests and analysing responses.
 
 Parameter(s):
-- agent-curl (dict): agent description
+- agent (text): agent name
 
 - curl-body (text): http request body
 
